@@ -1,21 +1,23 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
 
-<div class="masthead">
+<div class="post-masthead">
     <div class="container">
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
-                <!-- Post title goes in these h1 tags -->
                 <h1 class="post-title">{{ post.title }}</h1>
-                <!-- Post author goes before the | the post's created date goes after -->
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
-                <img src="{% static 'static/images/pexels-mdsnmdsnmdsn-1577882.jpg' %}" class="scale" alt="placeholder">
+                <img src="{% static 'images/pexels-mdsnmdsnmdsn-1577882.jpg' %}" 
+                     class="img-fluid rounded shadow" 
+                     alt="placeholder" 
+                     style="object-fit: cover; max-height: 400px; width: 100%;">
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="container">
     <div class="row">

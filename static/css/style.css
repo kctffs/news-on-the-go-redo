@@ -6,6 +6,8 @@
     font-family: 'Raleway', sans-serif;
     color: #212529;
     line-height: 1.6;
+    padding-top: 70px;
+    
 }
 
 a {
@@ -108,7 +110,8 @@ a:hover {
 /* ==========================
    MASTHEAD
    ========================== */
-.masthead {
+/* Homepage masthead */
+.home-masthead {
     margin-top: 10px;
     overflow: hidden;
     position: relative;
@@ -121,18 +124,21 @@ a:hover {
     text-align: center;
 }
 
-.masthead h1 {
+.home-masthead h1 {
     font-family: 'Montserrat', sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
-.masthead p {
-    font-size: 1.1rem;
-    font-weight: 300;
-    opacity: 0.9;
+/* Post detail masthead */
+.post-masthead {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    background: #f8f9fa; /* light background to separate it */
 }
+
 
 /* ==========================
    LINKS & BUTTONS
