@@ -70,6 +70,22 @@
     
     {% endif %}
 
+    <!-- Django Messages -->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message|safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main class="flex-shrink-0">
         {% if user.is_authenticated %}
