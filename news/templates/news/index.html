@@ -1,10 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <!-- index.html content starts here -->
 <div class="container my-5">
     <div class="row g-4">
-
         {% for post in post_list %}
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm post-card">
@@ -13,6 +13,12 @@
                         <a href="#" class="post-link">
                             <img src="{{ post.featured_image.url }}" class="card-img-top img-fluid" alt="{{ post.title }}">
                         </a>
+                    {% endif %}
+                    {% if "placeholder" in post.featured_image.url %}
+                    <img class="card-img-top" src="{% static 'images/default.jpg' %}"
+                        alt="placeholder image">
+                    {% else %}
+                    <img class="card-img-top" src=" {{ post.featured_image.url }}" alt="{{ post.title }}">
                     {% endif %}
                     <div class="image-flash">
                         <p class="author">By {{ post.author }}</p>
