@@ -40,9 +40,7 @@
             </strong>
         </div>
         <div class="col-12">
-            <hr>
-        </div>
-    </div>
+
 
     <div class="row">
         <!-- Existing Comments -->
@@ -64,7 +62,11 @@
                         {{ comment.body | linebreaks }}
                     </div>
                     {% if not comment.approved and comment.author == user %}
-                    <p class="approval">This comment is awaiting approval</p>
+                    <p class="approval">Comment is waiting to be approved.</p>
+                    {% endif %}
+                    {% if user.is_authenticated and comment.author == user %}
+                    <button class="btn btn-edit"
+                    comment_id="{{ comment.id }}">Edit</button>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -91,3 +93,7 @@
 </div>
 
 {% endblock content %}
+
+{% block extras %}
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}

@@ -1,1 +1,0 @@
-console.log("News On The Go has loaded successfully.");
