@@ -58,7 +58,7 @@ def post_detail(request, slug):
 
 def comment_edit(request, slug, comment_id):
     """
-    view to edit comments
+    Edit comments
     """
     if request.method == "POST":
 
@@ -77,3 +77,21 @@ def comment_edit(request, slug, comment_id):
             messages.add_message(request, messages.ERROR, 'Comment cannot be updated.')
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+def comment_delete(request, slug, comment_id):
+    """
+    Delete comment
+    """
+    queryset = Post.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment has been deleted')
+    else:
+        messages.add_message(request, messages.ERROR, 'Only your comments be deleted by you.')
+
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
