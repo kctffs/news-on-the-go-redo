@@ -24,6 +24,18 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title} | written by {self.author}"
 
+    def upvotes(self):
+        """Return the number of upvotes."""
+        return self.votes.filter(value=1).count()
+
+    def downvotes(self):
+        """Return the number of downvotes."""
+        return self.votes.filter(value=-1).count()
+
+    def score(self):
+        """Return the score (upvotes - downvotes)."""
+        return self.upvotes() - self.downvotes()
+
 
 class Comment(models.Model):
     post = models.ForeignKey(
@@ -39,3 +51,22 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
+
+
+class Vote(models.Model):
+    UPVOTE = 1
+    DOWNVOTE = -1
+    VOTE_CHOICES = (
+        (UPVOTE, "Upvote"),
+        (DOWNVOTE, "Downvote"),
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="votes")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
+    value = models.SmallIntegerField(choices=VOTE_CHOICES)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("user", "post")
+
+    def __str__(self):
+        return f"{self.user} voted {self.get_value_display()} on {self.post.title}"

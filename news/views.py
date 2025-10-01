@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
-from .models import Post, Comment
+from .models import Post, Comment, Vote
 from .forms import CommentForm
 
 
@@ -96,3 +98,28 @@ def comment_delete(request, slug, comment_id):
          be deleted by you.""")
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+
+@login_required
+def vote_post(request, post_id, vote_type):
+    """
+    Handle upvotes and downvotes on a post.
+    """
+    post = get_object_or_404(Post, pk=post_id)
+    user = request.user
+
+    existing_vote = Vote.objects.filter(post=post, user=user).first()
+
+    if existing_vote:
+        if (vote_type == 'up' and existing_vote.value == 1) or \
+           (vote_type == 'down' and existing_vote.value == -1):
+            existing_vote.delete()
+        else:
+            existing_vote.value = 1 if vote_type == 'up' else -1
+            existing_vote.save()
+    else:
+        Vote.objects.create(post=post, user=user, value=1 if vote_type == 'up' else -1)
+
+    return redirect('post_detail', slug=post.slug)
+
