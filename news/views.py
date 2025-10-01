@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import Post, Comment
 from .forms import CommentForm
 
-# Create your views here.
+
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "news/index.html"
@@ -39,10 +39,8 @@ def post_detail(request, slug):
         comment.author = request.user
         comment.post = post
         comment.save()
-        messages.add_message(
-        request, messages.SUCCESS,
-        "We appreciate your input! Your comment is pending approval and will appear shortly."
-    )
+        messages.add_message(request, messages.SUCCESS, """We appreciate your
+         input! Your comment is pending approval and will appear shortly.""")
 
     return render(
         request,
@@ -72,9 +70,11 @@ def comment_edit(request, slug, comment_id):
             comment.post = post
             comment.approved = False
             comment.save()
-            messages.add_message(request, messages.SUCCESS, 'Comment has been updated.')
+            messages.add_message(request, messages.SUCCESS, """Comment has been
+             updated.""")
         else:
-            messages.add_message(request, messages.ERROR, 'Comment cannot be updated.')
+            messages.add_message(request, messages.ERROR, """Comment cannot
+             be updated.""")
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
@@ -89,9 +89,10 @@ def comment_delete(request, slug, comment_id):
 
     if comment.author == request.user:
         comment.delete()
-        messages.add_message(request, messages.SUCCESS, 'Comment has been deleted')
+        messages.add_message(request, messages.SUCCESS, """Comment has been
+         deleted""")
     else:
-        messages.add_message(request, messages.ERROR, 'Only your comments be deleted by you.')
+        messages.add_message(request, messages.ERROR, """Only your comments
+         be deleted by you.""")
 
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-

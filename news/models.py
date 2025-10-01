@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
-# Create your models here.
+
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
@@ -20,7 +20,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-created_on"]
-    
+
     def __str__(self):
         return f"{self.title} | written by {self.author}"
 
