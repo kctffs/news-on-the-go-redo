@@ -95,7 +95,6 @@ def comment_delete(request, slug, comment_id):
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-
 @login_required
 def vote_post(request, post_id, vote_type):
     """
@@ -114,7 +113,7 @@ def vote_post(request, post_id, vote_type):
             existing_vote.value = 1 if vote_type == 'up' else -1
             existing_vote.save()
     else:
-        Vote.objects.create(post=post, user=user, value=1 if vote_type == 'up' else -1)
+        Vote.objects.create(
+            post=post, user=user, value=1 if vote_type == 'up' else -1)
 
     return redirect('post_detail', slug=post.slug)
-
