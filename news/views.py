@@ -18,14 +18,9 @@ def post_detail(request, slug):
     """
     Display an individual :model:`news.Post`.
 
-    **Context**
+    An instance of :model:`news.Post`.
 
-    ``post``
-        An instance of :model:`news.Post`.
-
-    **Template:**
-
-    :template:`news/post_detail.html`
+    :template:`news/post_detail.html`.
     """
 
     queryset = Post.objects.filter(status=1)

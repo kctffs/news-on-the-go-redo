@@ -60,8 +60,10 @@ class Vote(models.Model):
         (UPVOTE, "Upvote"),
         (DOWNVOTE, "Downvote"),
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="votes")
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="votes")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="votes")
     value = models.SmallIntegerField(choices=VOTE_CHOICES)
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -69,4 +71,5 @@ class Vote(models.Model):
         unique_together = ("user", "post")
 
     def __str__(self):
-        return f"{self.user} voted {self.get_value_display()} on {self.post.title}"
+        return f"""{self.user} voted {self.get_value_display()} on
+        {self.post.title}"""

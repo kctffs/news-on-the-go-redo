@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Post, Comment, Vote
 
+
 class TestNewsViews(TestCase):
     """
     Test for the voting functionality on Post objects.
@@ -18,9 +19,9 @@ class TestNewsViews(TestCase):
         """
         Create test data
         """
+        self.user = User.objects.create_user(
+            username='testuser', password='password')
 
-        self.user = User.objects.create_user(username='testuser', password='password')
-        
         self.post = Post.objects.create(
             title='Test Post',
             slug='test-post',
@@ -28,7 +29,7 @@ class TestNewsViews(TestCase):
             content='This is a test post content.',
             status=1
         )
-        
+
         self.comment = Comment.objects.create(
             post=self.post,
             author=self.user,
@@ -41,7 +42,6 @@ class TestNewsViews(TestCase):
         """
         Test the home page.
         """
-
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'news/index.html')
@@ -51,8 +51,8 @@ class TestNewsViews(TestCase):
         """
         Test the post detail view for a certain post.
         """
-
-        response = self.client.get(reverse('post_detail', args=[self.post.slug]))
+        response = self.client.get(reverse(
+            'post_detail', args=[self.post.slug]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'news/post_detail.html')
         self.assertContains(response, 'This is a test post content.')
@@ -62,22 +62,22 @@ class TestNewsViews(TestCase):
         """
         Test adding new comment to post.
         """
-
         self.client.login(username='testuser', password='password')
         response = self.client.post(
             reverse('post_detail', args=[self.post.slug]),
             {'body': 'Another test comment'}
         )
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(self.post.comments.filter(body='Another test comment').exists())
+        self.assertTrue(self.post.comments.filter(
+            body='Another test comment').exists())
 
     def test_upvote_post(self):
         """
         Test that a logged-in user can upvote a post.
         """
-
         self.client.login(username='testuser', password='password')
-        response = self.client.get(reverse('vote_post', args=[self.post.id, 'up']))
+        response = self.client.get(reverse(
+                'vote_post', args=[self.post.id, 'up']))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.post.votes.count(), 1)
         vote = self.post.votes.first()
@@ -87,9 +87,9 @@ class TestNewsViews(TestCase):
         """
         Test that a logged-in user can downvote a post.
         """
-
         self.client.login(username='testuser', password='password')
-        response = self.client.get(reverse('vote_post', args=[self.post.id, 'down']))
+        response = self.client.get(reverse(
+            'vote_post', args=[self.post.id, 'down']))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.post.votes.count(), 1)
         vote = self.post.votes.first()
@@ -99,7 +99,6 @@ class TestNewsViews(TestCase):
         """
         Test that clicking the same vote again removes it.
         """
-
         self.client.login(username='testuser', password='password')
         self.client.get(reverse('vote_post', args=[self.post.id, 'up']))
         self.client.get(reverse('vote_post', args=[self.post.id, 'up']))
@@ -109,7 +108,7 @@ class TestNewsViews(TestCase):
         """
         Test that voting on a post requires the user to be logged in.
         """
-        
-        response = self.client.get(reverse('vote_post', args=[self.post.id, 'up']))
+        response = self.client.get(reverse(
+            'vote_post', args=[self.post.id, 'up']))
         self.assertEqual(response.status_code, 302)
         self.assertFalse(self.post.votes.exists())

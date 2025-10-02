@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<!-- index.html content starts here -->
+
 <div class="container my-5">
     <div class="row g-4">
         {% for post in post_list %}
@@ -28,7 +28,7 @@
                     <p class="card-text text-muted small mb-2">
                         <i class="far fa-calendar-alt"></i> {{ post.created_on }}
                     </p>
-                    <hr />
+                    <hr>
                     <p class="card-text text-secondary">
                         {{ post.excerpt|truncatewords:20 }}
                     </p>
@@ -69,5 +69,5 @@
     {% endif %}
 
 </div>
-<!-- index.html content ends here -->
+
 {% endblock %}

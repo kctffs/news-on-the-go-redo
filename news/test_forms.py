@@ -1,21 +1,28 @@
 from django.test import TestCase
 from .forms import CommentForm
 
+
 class TestCommentForm(TestCase):
+    """
+    Test the CommentForm for correctly monitoring valid and invalid input.
+    """
+
 
     def test_form_is_valid(self):
         """
         Test that the CommentForm is valid when a body is provided.
         """
         comment_form = CommentForm({'body': 'This post exceeds expectations'})
-        self.assertTrue(comment_form.is_valid(), msg="Form is invalid when it should be valid")
+        self.assertTrue(comment_form.is_valid(), msg="""Form invalid when it
+        should be valid""")
 
     def test_form_is_invalid(self):
         """
         Test that the CommentForm is invalid when no body is provided.
         """
         comment_form = CommentForm({'body': ''})
-        self.assertFalse(comment_form.is_valid(), msg="Form is valid when it should be invalid")
+        self.assertFalse(comment_form.is_valid(), msg="""Form is valid when it
+        should be invalid""")
 
 
 class TestCommentFormValidation(TestCase):
@@ -28,8 +35,8 @@ class TestCommentFormValidation(TestCase):
         """
         Form should be valid with normal text input.
         """
-        form = CommentForm({'body': 'This is a great post'})
-        self.assertTrue(form.is_valid(), msg="Form is invalid with normal text")
+        form = CommentForm({'body': 'This post exceeds expectations'})
+        self.assertTrue(form.is_valid(), msg="Form invalid with normal text")
 
     def test_form_invalid_when_empty(self):
         """
@@ -42,6 +49,7 @@ class TestCommentFormValidation(TestCase):
         """
         Form should accept special characters and emojis.
         """
-        special_text = "Wow! 😎🔥 <b>Bold Text</b> & special chars ©®™"
+        special_text = "Wow! 🔥 <b>Bold Text</b> & special chars ©®™"
         form = CommentForm({'body': special_text})
-        self.assertTrue(form.is_valid(), msg="Form is invalid with special characters")
+        self.assertTrue(form.is_valid(), msg="""Form invalid with special
+        characters""")
