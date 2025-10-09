@@ -6,6 +6,11 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Post(models.Model):
+    """
+    Represents a blog post with fields for title, slug,
+    author, featured image, content, timestamps, status,
+    and an optional excerpt.
+    """
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(
@@ -38,6 +43,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Represents a comment made by a user on a specific post.
+    Author, content of the comment, approval status, and timestamp.
+    """
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(
@@ -54,6 +63,11 @@ class Comment(models.Model):
 
 
 class Vote(models.Model):
+    """
+    A vote can either be an upvote or a downvote.
+    Tracks the user, the post being voted on, the vote value
+    and the timestamp.
+    """
     UPVOTE = 1
     DOWNVOTE = -1
     VOTE_CHOICES = (

@@ -37,7 +37,6 @@ class TestNewsViews(TestCase):
             approved=True
         )
 
-
     def test_post_list_view(self):
         """
         Test the home page.

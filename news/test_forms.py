@@ -7,7 +7,6 @@ class TestCommentForm(TestCase):
     Test the CommentForm for correctly monitoring valid and invalid input.
     """
 
-
     def test_form_is_valid(self):
         """
         Test that the CommentForm is valid when a body is provided.
