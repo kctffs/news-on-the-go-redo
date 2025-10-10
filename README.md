@@ -13,6 +13,7 @@
   - At the top of the page, the header consists of the **_News On The Go_** title a **Home**, **Register** and **Login** buttons then finally, a slogan that reads **Rapid Reading OnTheGo** to emphasise the personality of the site.
   - Straight into the news feed as you depart from the header,  you are now met with the latest 6 news posts from created users. The feed is organised to present a clean system that fits every screen size, appealing to all devices. Underneath lies the **next** button for page surfing.
   - Finally, the footer is a bold tone. This footer clearly separates from the main body with info such as copyright and social media links.
+<img width="1430" height="800" alt="homepage" src="https://github.com/user-attachments/assets/c41f1d01-c867-44eb-981d-cc5a7485e0e6" />
 
 - ### Post Detail.
   - Whilst the header is universal, you are now met with an organised post page where the **title**, **author** and **date of post** are present on the left. An image is also seen to the right of this information for site personality.
@@ -87,7 +88,8 @@
   - Relationships:
   1. Post → Comment (1-to-many): Each post can have multiple comments, while each comment belongs to a single post. This then allows users to discuss individual posts.
   2. Post → Vote (1-to-many): Each post can have multiple votes (upvotes or downvotes), while each vote belongs to a single post. This enables a voting system for content popularity.
-  3. User → Post / Comment / Vote (1-to-many): Users can author multiple posts, submit multiple comments, and cast votes on multiple posts. (Django's built in user model)
+  3. User → Post / Comment / Vote (1-to-many): Users can author multiple posts, submit multiple comments, and cast votes on multiple posts. (Django's built in user model).
+
 <img width="640" height="370" alt="post-erd" src="https://github.com/user-attachments/assets/f86f12a5-97fb-4734-a881-c6e5e6272da4" /> <img width="640" height="244" alt="comment-erd" src="https://github.com/user-attachments/assets/3703084b-343f-48af-8d5e-ec3dae0854b2" /> <img width="640" height="212" alt="vote-erd" src="https://github.com/user-attachments/assets/1a6d8203-4c7a-4745-8e4f-319ffb1c466b" />
 
 ## Testing.
@@ -119,8 +121,9 @@
   - Below is a table for the tests that were carried out and the results. There is also proof of testing.
 <img width="642" height="413" alt="js-testing-findings" src="https://github.com/user-attachments/assets/240b0664-037a-4863-9724-2de4bc43a8a4" /> <img width="277" height="515" alt="update-button-transformation" src="https://github.com/user-attachments/assets/797dd7d6-201c-4194-adc9-65d5d70e7e01" /> <img width="489" height="183" alt="pop-up-deletion" src="https://github.com/user-attachments/assets/9163bcc9-92c5-4f09-8b3f-4611294d89b0" /> <img width="662" height="122" alt="confirming-deletion" src="https://github.com/user-attachments/assets/9d78ac8b-2178-4232-8513-9552a814c044" /> <img width="721" height="543" alt="open-comment" src="https://github.com/user-attachments/assets/8dbd5f51-3120-4029-8590-38a17f7a01f6" />
 
-- ### Bugs and Errors.
-  - 
+- ### Bugs, Errors and Warnings.
+  - No bugs or errors are apparent in the final deployment of **_News On The Go_** however, the warning being shown in the console from the web developer tools is:
+  `Mixed Content: The page at '<URL>' was loaded over HTTPS, but requested an insecure element '<URL>'. This request was automatically upgraded to HTTPS, For more information see <URL>`. This warning is not web breaking as it is stating that the images are being upgraded from `https` if they were originally `http`.
 
 ## Deployment.
 
@@ -130,7 +133,7 @@
     - Set the config var to key - `PORT` and value - `8000`.
     - Link Heroku to the repository. For example, **GitHub**.
     - Deploy.
-   - [The link to the deployed version is here.]()
+   - [The link to the deployed version is here.](https://news-on-the-go-2-f4426379ac34.herokuapp.com/)
 
 ## Credits.
 
@@ -148,5 +151,9 @@
 - ### Code.
   - The code for **_News On The Go_** was inspired by the **_I Think Therefore I Blog_** walkthrough.
   -  Two models, `Post` and `Comment` were inspired from the **_I Think Therefore I Blog_** walkthrough however, both of these models have been effectively altered to fit **_News On The Go_** as my interpretation of these models demanded more for the project.
- 
+
+ - ### Future Plans.
+   - **_News On The Go_** would be to develop a whole user profiling side. This is something chosen to not initially do as for a news site, the whole premise is to be quick reading. A quick vote is fine however when playing about with a profile, status etc, the website then loses purpose.
+   - When thinking of sites such as [BBC News](https://www.bbc.co.uk/news) and [Reddit](https://www.reddit.com/), maybe initial categorisation on the Nav bar for swift access to topics.
+   - A model for either subscribing to get updates, or an interactive contacting us model. This would be for feedback from the community about **_News On The Go_**.
 
