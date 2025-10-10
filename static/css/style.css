@@ -18,6 +18,14 @@ a:hover {
     color: #0d6efd;
 }
 
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
 /* ==========================
    BRANDING / TITLES
    ========================== */
