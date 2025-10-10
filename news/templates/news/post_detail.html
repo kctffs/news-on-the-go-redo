@@ -11,10 +11,17 @@
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
-                <img src="{% static 'images/placeholder.jpg' %}" 
-                     class="img-fluid rounded shadow" 
-                     alt="placeholder" 
-                     style="object-fit: cover; max-height: 400px; width: 100%;">
+                {% if post.featured_image %}
+                    <img src="{{ post.featured_image.url }}" 
+                         class="img-fluid rounded shadow" 
+                         alt="{{ post.title }}" 
+                         style="object-fit: cover; max-height: 400px; width: 100%;">
+                {% else %}
+                    <img src="{% static 'images/placeholder.jpg' %}" 
+                         class="img-fluid rounded shadow" 
+                         alt="placeholder" 
+                         style="object-fit: cover; max-height: 400px; width: 100%;">
+                {% endif %}
             </div>
         </div>
     </div>
